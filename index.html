@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Blogging Website</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="css\style.css">
+</head>
+<body>
+    <nav class="navbar">
+        <img src="logo.png" class="logo" alt="">
+        <ul class="links-container">
+            <li class="link-item"><a href="/" class="link">home</a></li>
+            <li class="link-item"><a href="/" class="link">post</a></li>
+        </ul>
+    </nav>
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <h2><br>Blogging Topic</h2>
+                <p>Blogging Description</p>
+            </div>
+        </div>
+       
+        <div class="row" id="posts">
+           
+        </div>
+        <div class="blog-options">
+         
+            <button class="btn dark publish-btn" onclick="openPostModal()">Add Post</button>
+            
+        </div>
+    </div>
+
+
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <script src="script.js"></script>
+    <div class="modal fade" id="postModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Add a Post</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <form id="postForm">
+                        <div class="form-group">
+                            <label for="postTitle">Title</label>
+                            <input type="text" class="form-control" id="postTitle" placeholder="Enter title">
+                        </div>
+                        <div class="form-group">
+                            <label for="postContent">Content</label>
+                            <textarea class="form-control" id="postContent" rows="3" placeholder="Enter content"></textarea>
+                        </div>
+                        <div class="form-group">
+                            <label for="postImage">Upload Image</label>
+                            <input type="file" accept="image/*" class="form-control" id="postImage" placeholder="Upload image">
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-primary" onclick="addPostFromForm()">Add Post</button>
+                    <button type="button" class="btn btn-primary" onclick="uploadimage()">upload image</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script>    
+        function openPostModal() {
+            $('#postModal').modal('show');
+        }
+    
+        function addPostFromForm() {
+            const title = document.getElementById('postTitle').value;
+            const content = document.getElementById('postContent').value;
+            const image = document.getElementById('postImage').value;
+    
+            if (title && content && image) {
+                addPost(title, content, image);
+                $('#postModal').modal('hide');
+            } else {
+                alert('Please fill in all fields.');
+            }
+        }
+        function uploadImage() {
+            const input = document.getElementById('postImage');
+            const file = input.files[0]; 
+            console.log('File details:', file);
+        }
+    </script>
+</body>
+</html>
